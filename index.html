@@ -1,28 +1,39 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <title>Вывод списка объектов карты</title>
+  <head>
+    <title>Essential</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU&amp;apikey=399c8996-ba05-4451-93b3-94d25c1f32eb" type="text/javascript"></script>
+    <script
+      src="https://api-maps.yandex.ru/2.1/?lang=ru_RU&amp;apikey=399c8996-ba05-4451-93b3-94d25c1f32eb"
+      type="text/javascript"
+    ></script>
     <script src="https://yandex.st/jquery/2.2.3/jquery.min.js" type="text/javascript"></script>
-    <script src='script.js' type="text/javascript"></script>
-    <script src='shops.js' type="text/javascript"></script>
+    <script src="script.js" type="text/javascript"></script>
+    <script src="shops.js" type="text/javascript"></script>
     <link rel="stylesheet" href="index.css" />
-</head>
+  </head>
 
-<body>
-    <div class="Map-Modal" >
+  <body>
+    <button id="toggle">click to see the map</button>
+
+    <div class="Map-Modal">
+      <div class="Map-Modal-Header">
+        <button id="back">
+          <span> Назад</span>
+        </button>
+        Где купить
+      </div>
+      <div class="Map-Modal-Content">
         <div id="map"></div>
-        <div class="menu"></div>
+        <div class="Menu"></div>
+      </div>
+      <div class="Map-Modal-Card"></div>
     </div>
     <script>
-         $(document).ready(function() {
-       })
+      $(document).ready(function () {});
+    </script>
 
-   
-</script>
-
-<!-- <script type="text/javascript">
+    <!-- <script type="text/javascript">
     function initClient() {
   // 2. Initialize the JavaScript client library.
   gapi.client.init({
@@ -73,7 +84,5 @@ function handleClientLoad() {
 
 <script src="https://apis.google.com/js/api.js" async defer onload="this.onload=function(){};handleClientLoad()"
 onreadystatechange="if (this.readyState === 'complete') this.onload()"></script> -->
-
-</body>
-
+  </body>
 </html>
