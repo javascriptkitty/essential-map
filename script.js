@@ -54,6 +54,12 @@ function init() {
     map.geoObjects.events.add('click', (event) => {
       const id = event.get('objectId');
       createCard(id);
+
+      map.geoObjects.events.add('click', (event) => {
+        if (event.get('objectId') !== id) {
+          objectManager.objects.setObjectOptions(id, { ...defaultPreset });
+        }
+      });
     });
 
     //create menu
@@ -100,9 +106,11 @@ function init() {
         .addClass('close-btn')
         .bind('click', function () {
           $('.Map-Modal-Card').css('display', 'none');
+          objectManager.objects.setObjectOptions(id, { ...defaultPreset });
         });
       $('.Map-Modal-Card').empty().append(content, close);
       $('.Map-Modal-Card').css('display', 'block');
+      objectManager.objects.setObjectOptions(id, { ...hoverPreset });
     }
 
     $('.Map-Modal').css('display', 'block');
