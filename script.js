@@ -15,12 +15,12 @@ function init() {
   let map;
 
   // Создание экземпляра карты.
-  function createMap() {
+  function createMap(data) {
     map = new ymaps.Map(
       'map',
       {
         center: [55.753215, 37.622504],
-        zoom: 10,
+        zoom: 9,
         controls: ['zoomControl'],
       },
       {
@@ -34,7 +34,7 @@ function init() {
 
     const collection = {
       type: 'FeatureCollection',
-      features: shops.map(({ id, coords, vendor }) => ({
+      features: data.map(({ id, coords, vendor }) => ({
         type: 'Feature',
         id,
         geometry: {
@@ -56,7 +56,7 @@ function init() {
       if (typeof id !== 'undefined') {
         const content = $('<div>')
           .addClass('Map-Modal-Card-Content')
-          .append(getCardContent(shops.find((el) => el.id === id)));
+          .append(getCardContent(data.find((el) => el.id === id)));
 
         const close = $('<span>')
           .addClass('close-btn')
@@ -67,15 +67,10 @@ function init() {
         $('.Map-Modal-Card').css('display', 'block');
       }
     });
-    // $.ajax({
-    //     url: "data.json"
-    // }).done(function(data) {
-    //     objectManager.add(data);
-    // });
 
     //create menu
     $(function () {
-      shops.forEach((shop) => {
+      data.forEach((shop) => {
         const menuItem = getCardContent(shop);
 
         menuItem.bind('mouseover', function () {
@@ -99,18 +94,40 @@ function init() {
     }
 
     $('.Map-Modal').css('display', 'block');
-
-    // Выставляем масштаб карты чтобы были видны все группы.
-    // map.setBounds(map.geoObjects.getBounds());
   }
 
-  $('#toggle').bind('click', createMap);
+  $('#toggle').bind('click', function () {
+    fetch('https://sheetdb.io/api/v1/fxwqiedl4xd7p')
+      .then((response) => response.json())
+      .then((res) => {
+        const data = res.map((el) => ({
+          id: el.id,
+          address: el.address,
+          vendor: el.vendor,
+          coords: [parseFloat(el.latitude), parseFloat(el.longitude)],
+        }));
+        createMap(data);
+      });
+  });
 
   $('#back').bind('click', function () {
     map.destroy();
     map = null;
     $('.Map-Modal').css('display', 'none');
   });
+}
+
+function getShops() {
+  fetch('https://sheetdb.io/api/v1/fxwqiedl4xd7p')
+    .then((response) => response.json())
+    .then((data) =>
+      data.map((el) => ({
+        id: el.id,
+        address: el.address,
+        vendor: el.vendor,
+        coords: [parseFloat(el.latitude), parseFloat(el.longitude)],
+      }))
+    );
 }
 
 function getSlug(vendor) {

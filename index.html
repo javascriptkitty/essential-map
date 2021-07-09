@@ -9,7 +9,6 @@
     ></script>
     <script src="https://yandex.st/jquery/2.2.3/jquery.min.js" type="text/javascript"></script>
     <script src="script.js" type="text/javascript"></script>
-    <script src="shops.js" type="text/javascript"></script>
     <link rel="stylesheet" href="index.css" />
   </head>
 
@@ -29,60 +28,21 @@
       </div>
       <div class="Map-Modal-Card"></div>
     </div>
-    <script>
-      $(document).ready(function () {});
+    <!-- <script>
+      $(document).ready(function () {
+        fetch('https://sheetdb.io/api/v1/fxwqiedl4xd7p')
+          .then((response) => response.json())
+          .then((data) =>
+            console.log(
+              data.map((el) => ({
+                id: el.id,
+                address: el.address,
+                vendor: el.vendor,
+                coords: [parseFloat(el.latitude), parseFloat(el.longitude)],
+              }))
+            )
+          );
+      }); -->
     </script>
-
-    <!-- <script type="text/javascript">
-    function initClient() {
-  // 2. Initialize the JavaScript client library.
-  gapi.client.init({
-    'apiKey': 'AIzaSyCE6RnodlKgJNztRdAKUvVy7TnK2xlDgpc',
-    'discoveryDocs': ['https://people.googleapis.com/$discovery/rest?version=v4'],
-    'clientId': '565710059923-ur3c74mdknjk8fl5o90sblmn5dbiursh.apps.googleusercontent.com',
-    'scope': 'https://www.googleapis.com/auth/spreadsheets.readonly',
-  }).then(function() {
-      debugger
-    // 3. Initialize and make the API request.
-    gapi.auth2.getAuthInstance().signIn();
-    // getShops()
-
-  }).then(function(response) {
-      debugger
-    console.log(response.result);
-  }, function(reason) {
-    console.log('Error: ' + reason.result.error.message);
-  });
-};
-
-function getShops() {
-        gapi.client.sheets.spreadsheets.values.get({
-          spreadsheetId: '14D2IdfDbuCyvbbhXJ1_nW3rOSAfdUNOu',
-          range: 'Class Data!A2:E',
-        }).then(function(response) {
-          const range = response.result;
-          if (range.values.length > 0) {
-let arr = []
-          
-            for (i = 0; i < range.values.length; i++) {
-              var row = range.values[i];
-           arr.push({id: row[4], coords:[row[0], row[1]], address:row[2],vendor:row[3]})
-           
-            }
-            console.log(arr)
-          } 
-        }, function(response) {
-            console.log('Error: ' + response.result.error.message);
-        });
-      }
-
-// 1. Load the JavaScript client library.
-function handleClientLoad() {
-        gapi.load('client:auth2', initClient);
-      }
-</script>
-
-<script src="https://apis.google.com/js/api.js" async defer onload="this.onload=function(){};handleClientLoad()"
-onreadystatechange="if (this.readyState === 'complete') this.onload()"></script> -->
   </body>
 </html>
