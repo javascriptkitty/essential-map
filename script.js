@@ -53,19 +53,7 @@ function init() {
 
     map.geoObjects.events.add('click', (event) => {
       const id = event.get('objectId');
-      if (typeof id !== 'undefined') {
-        const content = $('<div>')
-          .addClass('Map-Modal-Card-Content')
-          .append(getCardContent(data.find((el) => el.id === id)));
-
-        const close = $('<span>')
-          .addClass('close-btn')
-          .bind('click', function () {
-            $('.Map-Modal-Card').css('display', 'none');
-          });
-        $('.Map-Modal-Card').empty().append(content, close);
-        $('.Map-Modal-Card').css('display', 'block');
-      }
+      createCard(id);
     });
 
     //create menu
@@ -79,8 +67,18 @@ function init() {
         menuItem.bind('mouseout', function () {
           objectManager.objects.setObjectOptions(shop.id, { ...defaultPreset });
         });
-        menuItem.appendTo($('.Menu'));
+        menuItem.appendTo($('.Menu-List'));
       });
+      $('.Menu-Expantion').append(
+        ` <p>Смотреть в списке <b>${data.length} оффлайн-${pluralizeShop(data.length)}</b></p>`
+      );
+      if (window.innerWidth < 560) {
+        $('.Menu-Item').bind('click', function (event) {
+          const id = event.currentTarget.id.replace('item-', '');
+          createCard(id);
+          $('.Menu').removeClass('Expanded');
+        });
+      }
     });
 
     function getCardContent(shop) {
@@ -89,8 +87,22 @@ function init() {
       const vendor = $('<h4>' + shop.vendor + '</h4>');
       const address = $('<p>' + shop.address + '</p>');
       const info = $('<div>').addClass('Menu-Item-Info').append(vendor, address);
-      const menuItem = $('<div>').addClass('Menu-Item').append(image, info);
+      const menuItem = $('<div>').addClass('Menu-Item').attr('id', `item-${shop.id}`).append(image, info);
       return menuItem;
+    }
+
+    function createCard(id) {
+      const content = $('<div>')
+        .addClass('Map-Modal-Card-Content')
+        .append(getCardContent(data.find((el) => el.id === id)));
+
+      const close = $('<span>')
+        .addClass('close-btn')
+        .bind('click', function () {
+          $('.Map-Modal-Card').css('display', 'none');
+        });
+      $('.Map-Modal-Card').empty().append(content, close);
+      $('.Map-Modal-Card').css('display', 'block');
     }
 
     $('.Map-Modal').css('display', 'block');
@@ -148,3 +160,13 @@ function getSlug(vendor) {
   }
   return slug;
 }
+
+const pluralizeShop = (num) => {
+  const options = ['магазин', 'магазина', 'магазинов'];
+  return pluralize(num, options);
+};
+
+const pluralize = (count, words) => {
+  const cases = [2, 0, 1, 1, 1, 2];
+  return count === undefined ? count : words[count % 100 > 4 && count % 100 < 20 ? 2 : cases[Math.min(count % 10, 5)]];
+};

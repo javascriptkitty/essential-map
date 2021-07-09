@@ -80,7 +80,9 @@ p {
   padding: 20px 40px;
   background: #fcfdfd;
 }
-
+.Menu-Expantion {
+  display: none;
+}
 .Menu-Item {
   display: flex;
   align-items: center;
@@ -148,6 +150,160 @@ p {
   right: 20px;
   background: url('./assets/img/close.svg') center no-repeat;
   cursor: pointer;
+}
+.Menu-Head {
+  visibility: hidden;
+  display: none;
+}
+
+@media screen and (max-width: 560px) {
+  .Map-Modal-Content {
+    flex-direction: column;
+    position: relative;
+    margin-top: 0;
+  }
+  .Map-Modal-Header {
+    font-size: 14px;
+    line-height: 20px;
+    padding-left: 24px;
+    height: 48px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+  }
+  #map {
+    width: 100%;
+    position: fixed;
+    padding-top: 48px;
+  }
+  #back {
+    position: absolute;
+    display: inline-block;
+    height: 100%;
+    width: 33px;
+    left: 88%;
+    background: url('./assets/img/close.svg') center no-repeat;
+  }
+
+  .Menu {
+    width: 100%;
+    margin-top: calc(var(--vh, 1vh) * 100 - 82px);
+    position: absolute;
+    border-radius: 16px 16px 0 0;
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.15);
+    padding: 0 24px;
+  }
+
+  .Menu-Expantion {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 12px 0 46px;
+
+    cursor: pointer;
+  }
+  .Menu-Expantion p {
+    margin-top: 10px;
+    font-size: 13px;
+    line-height: 24px;
+  }
+  .Menu-Expantion::before {
+    content: '';
+    position: absolute;
+    width: 40px;
+    height: 4px;
+    background: #818f99;
+    opacity: 0.4;
+    border-radius: 32px;
+  }
+
+  .Expanded {
+    display: block;
+    top: 0;
+    margin-top: 0;
+    border-radius: 0;
+    height: 100vh;
+    transition: all 0.5s ease;
+    z-index: 3500;
+  }
+  .Expanded .Menu-Head {
+    display: flex;
+    border-bottom: 1px solid #ebf2f7;
+    padding: 14px 0;
+    margin-bottom: 6px;
+    background: white;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    justify-content: flex-start;
+    align-items: center;
+  }
+  .Expanded .Menu-Head,
+  .Expanded .Menu-List {
+    display: block;
+    visibility: visible;
+    transition: all 0.5s ease;
+  }
+  .Expanded .Menu-List {
+    padding-top: 48px;
+  }
+  .Expanded .Menu-Expantion {
+    display: none;
+  }
+  .Expanded button {
+    background: linear-gradient(141.11deg, #016cba -3.21%, #0fa4f8 103.86%);
+    box-shadow: -8px -8px 12px hsl(0deg 0% 100% / 25%), 0 8px 12px rgb(15 157 241 / 11%),
+      inset 0 44px 20px rgb(0 0 0 / 2%), inset 0 -16px 20px rgb(0 0 0 / 6%);
+    padding: 20px 60px;
+    font-weight: 600;
+    padding: 20px 40px;
+    font-size: 17px;
+    color: #fff;
+    cursor: pointer;
+    transition: background-color 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
+    border: none;
+    border-radius: 12px;
+    position: fixed;
+    width: calc(100vw - 2 * 24px);
+    bottom: 24px;
+    margin: auto;
+    line-height: 1;
+  }
+  .Expanded button span {
+    display: inline-flex;
+    align-items: center;
+  }
+  .Expanded button span::before {
+    content: '';
+    width: 25px;
+    height: 24px;
+    background: url('./assets/img/map.svg') center no-repeat;
+    display: inline-block;
+    margin-right: 12px;
+  }
+  .Map-Modal-Card {
+    bottom: calc(84px + 20px);
+    width: calc(100vw - 48px);
+    right: 0;
+    left: 0;
+    margin: auto;
+  }
+  .Map-Modal-Card-Content .Menu-Item .Menu-Item-Info {
+    width: 150px;
+  }
+}
+
+@media screen and (max-width: 370px) {
+  .Expanded button {
+    padding: 20px;
+  }
+  .Map-Modal-Card {
+    padding: 4px 20px;
+    width: calc(100vw - 36px);
+  }
+  .Map-Modal-Card .Menu-Item-Image {
+    margin-right: 16px;
+  }
 }
 
 /* montserrat-500 - latin_cyrillic */

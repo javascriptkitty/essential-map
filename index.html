@@ -3,6 +3,7 @@
   <head>
     <title>Essential</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script
       src="https://api-maps.yandex.ru/2.1/?lang=ru_RU&amp;apikey=399c8996-ba05-4451-93b3-94d25c1f32eb"
       type="text/javascript"
@@ -17,32 +18,35 @@
 
     <div class="Map-Modal">
       <div class="Map-Modal-Header">
-        <button id="back">
-          <span> Назад</span>
-        </button>
+        <button id="back"></button>
         Где купить
       </div>
       <div class="Map-Modal-Content">
         <div id="map"></div>
-        <div class="Menu"></div>
+        <div class="Menu">
+          <div class="Menu-Expantion"></div>
+          <div class="Menu-Head">
+            <p>Где купить</p>
+          </div>
+          <div class="Menu-List"></div>
+        </div>
       </div>
       <div class="Map-Modal-Card"></div>
     </div>
-    <!-- <script>
-      $(document).ready(function () {
-        fetch('https://sheetdb.io/api/v1/fxwqiedl4xd7p')
-          .then((response) => response.json())
-          .then((data) =>
-            console.log(
-              data.map((el) => ({
-                id: el.id,
-                address: el.address,
-                vendor: el.vendor,
-                coords: [parseFloat(el.latitude), parseFloat(el.longitude)],
-              }))
-            )
-          );
-      }); -->
+    <script>
+      if (window.innerWidth > 560) {
+        $('#back').append('<span> Назад</span>');
+      } else {
+        const vh = window.innerHeight * 0.01;
+        document.documentElement.style.setProperty('--vh', `${vh}px`);
+        $('.Menu-Expantion').bind('touchstart', function () {
+          $('.Menu').addClass('Expanded');
+          const backToMap = $('<button><span>Вернуться на карту</span></button>').bind('click', function () {
+            $('.Menu').removeClass('Expanded');
+          });
+          $('.Expanded').append(backToMap);
+        });
+      }
     </script>
   </body>
 </html>
