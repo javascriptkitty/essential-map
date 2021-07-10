@@ -75,7 +75,7 @@ function init() {
         });
         menuItem.appendTo($('.Menu-List'));
       });
-      $('.Menu-Expantion').append(
+      $('.Menu-Expansion').append(
         ` <p>Смотреть в списке <b>${data.length} оффлайн-${pluralizeShop(data.length)}</b></p>`
       );
       if (window.innerWidth < 560) {
@@ -133,6 +133,9 @@ function init() {
   $('#back').bind('click', function () {
     map.destroy();
     map = null;
+    $('.Menu-List').empty();
+    $('.Menu-Expansion').empty();
+    $('.Map-Modal-Card').css('display', 'none');
     $('.Map-Modal').css('display', 'none');
   });
 }

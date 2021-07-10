@@ -48,6 +48,7 @@ p {
   background: none;
   cursor: pointer;
   padding: 0;
+  z-index: 1;
 }
 .Map-Modal-Header button span {
   font-size: 17px;
@@ -80,7 +81,7 @@ p {
   padding: 20px 40px;
   background: #fcfdfd;
 }
-.Menu-Expantion {
+.Menu-Expansion {
   display: none;
 }
 .Menu-Item {
@@ -152,7 +153,6 @@ p {
   cursor: pointer;
 }
 .Menu-Head {
-  visibility: hidden;
   display: none;
 }
 
@@ -193,21 +193,23 @@ p {
     box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.15);
     padding: 0 24px;
   }
-
-  .Menu-Expantion {
+  .Menu-Head,
+  .Menu-List {
+    display: none;
+  }
+  .Menu-Expansion {
     display: flex;
     justify-content: center;
     align-items: flex-start;
     padding: 12px 0 46px;
-
     cursor: pointer;
   }
-  .Menu-Expantion p {
+  .Menu-Expansion p {
     margin-top: 10px;
     font-size: 13px;
     line-height: 24px;
   }
-  .Menu-Expantion::before {
+  .Menu-Expansion::before {
     content: '';
     position: absolute;
     width: 40px;
@@ -224,7 +226,7 @@ p {
     border-radius: 0;
     height: 100vh;
     transition: all 0.5s ease;
-    z-index: 3500;
+    z-index: 1600;
   }
   .Expanded .Menu-Head {
     display: flex;
@@ -241,13 +243,12 @@ p {
   .Expanded .Menu-Head,
   .Expanded .Menu-List {
     display: block;
-    visibility: visible;
     transition: all 0.5s ease;
   }
   .Expanded .Menu-List {
     padding-top: 48px;
   }
-  .Expanded .Menu-Expantion {
+  .Expanded .Menu-Expansion {
     display: none;
   }
   .Expanded button {

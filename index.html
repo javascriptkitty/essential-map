@@ -24,7 +24,7 @@
       <div class="Map-Modal-Content">
         <div id="map"></div>
         <div class="Menu">
-          <div class="Menu-Expantion"></div>
+          <div class="Menu-Expansion"></div>
           <div class="Menu-Head">
             <p>Где купить</p>
           </div>
@@ -39,7 +39,7 @@
       } else {
         const vh = window.innerHeight * 0.01;
         document.documentElement.style.setProperty('--vh', `${vh}px`);
-        $('.Menu-Expantion').bind('touchstart', function () {
+        $('.Menu-Expansion').bind('touchstart', function () {
           $('.Menu').addClass('Expanded');
           const backToMap = $('<button><span>Вернуться на карту</span></button>').bind('click', function () {
             $('.Menu').removeClass('Expanded');
