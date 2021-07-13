@@ -12,8 +12,6 @@ const hoverPreset = {
 };
 
 function init() {
-  let map;
-
   $('#toggle').bind('click', function () {
     fetch('https://sheetdb.io/api/v1/fxwqiedl4xd7p')
       .then((response) => response.json())
@@ -33,22 +31,13 @@ function init() {
         createMap(data);
       });
   });
-
-  $('#back').bind('click', function () {
-    map.destroy();
-    map = null;
-    $('.Menu-List').empty();
-    $('.Menu-Expansion').empty();
-    $('.Map-Modal-Card').css('display', 'none');
-    $('.Map-Modal').css('display', 'none');
-  });
 }
 
 function createMap(data) {
   map = new ymaps.Map(
     'map',
     {
-      center: [55.753215, 37.622504],
+      center: [55.762937, 37.435451],
       zoom: 9,
       controls: ['zoomControl'],
     },
@@ -88,6 +77,7 @@ function createMap(data) {
       return x > top[0] && x < bottom[0] && y > top[1] && y < bottom[1];
     });
     $('.Menu-List').empty();
+    $('.Menu-Expansion').empty();
     createMenu(shopsVisible, objectManager);
   });
 
@@ -111,9 +101,26 @@ function createMap(data) {
     });
   });
 
+  // $('#map').bind('toggle', function (event, ui) {
+  //   map.container.fitToViewport();
+  //   map.setBounds(myMap.geoObjects.getBounds(), {
+  //     duration: 500,
+  //     timingFunction: 'ease',
+  //   });
+  // });
+
   createMenu(data, objectManager);
 
   $('.Map-Modal').css('display', 'block');
+
+  $('#back').bind('click', function () {
+    map.destroy();
+    map = null;
+    $('.Menu-List').empty();
+    $('.Menu-Expansion').empty();
+    $('.Map-Modal-Card').css('display', 'none');
+    $('.Map-Modal').css('display', 'none');
+  });
 }
 
 function createMenu(shops, objectManager) {
