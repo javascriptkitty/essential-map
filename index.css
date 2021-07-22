@@ -155,6 +155,9 @@ p {
 .Menu-Head {
   display: none;
 }
+.Menu button {
+  display: none;
+}
 
 @media screen and (max-width: 560px) {
   .Map-Modal-Content {
@@ -193,6 +196,7 @@ p {
     box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.15);
     padding: 0 24px;
   }
+
   .Menu-Head,
   .Menu-List {
     display: none;
@@ -269,6 +273,7 @@ p {
     bottom: 24px;
     margin: auto;
     line-height: 1;
+    display: block;
   }
   .Expanded button span {
     display: inline-flex;
