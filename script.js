@@ -1,5 +1,6 @@
 ymaps.ready(init);
 
+const mapCenter = [55.762937, 37.435451];
 const defaultPreset = {
   iconImageSize: [34, 45],
   iconImageOffset: [-17, -45],
@@ -27,7 +28,7 @@ function createMap(data) {
   map = new ymaps.Map(
     'map',
     {
-      center: [55.762937, 37.435451],
+      center: mapCenter,
       zoom: 9,
       controls: ['zoomControl'],
     },
@@ -78,10 +79,12 @@ function createMap(data) {
       duration: 500,
       timingFunction: 'ease',
     });
+
     createCard(
       id,
       data.find((el) => el.id === id),
-      objectManager
+      objectManager,
+      resetMap
     );
 
     map.geoObjects.events.add('click', (event) => {
@@ -90,6 +93,13 @@ function createMap(data) {
       }
     });
   });
+
+  function resetMap() {
+    map.setCenter(mapCenter, 9, {
+      duration: 500,
+      timingFunction: 'ease',
+    });
+  }
 
   // $('#map').bind('toggle', function (event, ui) {
   //   map.container.fitToViewport();
@@ -151,7 +161,7 @@ function getCardContent(shop) {
   return menuItem;
 }
 
-function createCard(id, data, objectManager) {
+function createCard(id, data, objectManager, resetMap) {
   const content = $('<div>').addClass('Map-Modal-Card-Content').append(getCardContent(data));
 
   const close = $('<span>')
@@ -159,6 +169,7 @@ function createCard(id, data, objectManager) {
     .bind('click', function () {
       $('.Map-Modal-Card').css('display', 'none');
       objectManager.objects.setObjectOptions(id, { ...defaultPreset });
+      resetMap();
     });
   $('.Map-Modal-Card').empty().append(content, close);
   $('.Map-Modal-Card').css('display', 'block');
